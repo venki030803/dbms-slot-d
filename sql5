@@ -1,0 +1,254 @@
+mysql> alter table stu add primary key(rollno);
+Query OK, 0 rows affected (0.17 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+mysql> alter table stu modify column mobile_no int not null;
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+mysql> desc stu;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| Rollno    | int         | NO   | PRI | NULL    |       |
+| Name      | varchar(20) | YES  |     | NULL    |       |
+| Dept      | varchar(4)  | YES  |     | NULL    |       |
+| Gender    | varchar(1)  | YES  |     | NULL    |       |
+| DOB       | date        | YES  |     | NULL    |       |
+| city      | varchar(20) | YES  |     | NULL    |       |
+| mobile_no | int         | NO   |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+mysql> use student;
+Database changed
+mysql> select* from stu;
++--------+----------+------+--------+------------+-----------+-----------+
+| Rollno | Name     | Dept | Gender | DOB        | city      | mobile_no |
++--------+----------+------+--------+------------+-----------+-----------+
+|    271 | sai      | cse  | M      | 2003-10-30 | chittor   |  98262944 |
+|    272 | eswar    | cse  | M      | 2002-09-14 | vellore   |  98262324 |
+|    273 | venuthna | cse  | F      | 2003-06-26 | chennai   |  63242324 |
+|    274 | vikas    | cse  | m      | 2002-01-16 | cuddalore | 637435711 |
++--------+----------+------+--------+------------+-----------+-----------+
+4 rows in set (0.04 sec)
+
+mysql> select rollno,name,DOB from stu;
++--------+----------+------------+
+| rollno | name     | DOB        |
++--------+----------+------------+
+|    271 | sai      | 2003-10-30 |
+|    272 | eswar    | 2002-09-14 |
+|    273 | venuthna | 2003-06-26 |
+|    274 | vikas    | 2002-01-16 |
++--------+----------+------------+
+4 rows in set (0.03 sec)
+
+mysql> select*from stu where Gender="f";
++--------+----------+------+--------+------------+---------+-----------+
+| Rollno | Name     | Dept | Gender | DOB        | city    | mobile_no |
++--------+----------+------+--------+------------+---------+-----------+
+|    273 | venuthna | cse  | F      | 2003-06-26 | chennai |  63242324 |
++--------+----------+------+--------+------------+---------+-----------+
+1 row in set (0.05 sec)
+
+mysql> select*from student;
++-------------+---------+--------+------------+-----------+------------+-----------+
+| REGISTER_NO | NAME    | GENDER | DOB        | MOBILE_NO | CITY       | course_no |
++-------------+---------+--------+------------+-----------+------------+-----------+
+|   191711342 | viki    | M      | 1998-01-22 |     79764 | CHENNAI    | c001      |
+|   192011002 | vikas   | M      | 2002-02-23 |     79845 | CHENNAI    | c002      |
+|   192011003 | sekar   | M      | 2003-06-15 |     68768 | CHENNAI    | c003      |
+|   192011004 | vishnu  | M      | 2002-08-23 |     97894 | SAILAYUR   | c001      |
+|   192011008 | aishu   | F      | 2002-02-15 |     78487 | MOTIHARI   | c001      |
+|   192011010 | prakesh | M      | 2000-01-23 |     79322 | JUMBOBUMBO | c003      |
++-------------+---------+--------+------------+-----------+------------+-----------+
+6 rows in set (0.03 sec)
+
+mysql> select*from student where course_no ="c001";
++-------------+--------+--------+------------+-----------+----------+-----------+
+| REGISTER_NO | NAME   | GENDER | DOB        | MOBILE_NO | CITY     | course_no |
++-------------+--------+--------+------------+-----------+----------+-----------+
+|   191711342 | viki   | M      | 1998-01-22 |     79764 | CHENNAI  | c001      |
+|   192011004 | vishnu | M      | 2002-08-23 |     97894 | SAILAYUR | c001      |
+|   192011008 | aishu  | F      | 2002-02-15 |     78487 | MOTIHARI | c001      |
++-------------+--------+--------+------------+-----------+----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> use faculty;
+Database changed
+mysql> alter table fal add primary key(faculty_id);
+Query OK, 0 rows affected (0.15 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table fal add check(gender = 'M' or gender = 'F');
+Query OK, 0 rows affected (0.19 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc fal;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| Faculty_id | varchar(4)  | NO   | PRI | NULL    |       |
+| Fac_Name   | varchar(15) | YES  |     | NULL    |       |
+| gender     | char(1)     | YES  |     | NULL    |       |
+| DOB        | date        | YES  |     | NULL    |       |
+| DOJ        | date        | YES  |     | NULL    |       |
+| Mobile_no  | int         | YES  |     | NULL    |       |
+| dept       | varchar(4)  | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+7 rows in set (0.03 sec)
+
+mysql> use department;
+Database changed
+mysql> alter table dept add primary key(dept_no);
+Query OK, 0 rows affected (0.13 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> select*from fal;
++------------+----------+--------+------------+------------+-----------+------+------+
+| Faculty_id | Fac_Name | gender | DOB        | DOJ        | Mobile_no | dept | age  |
++------------+----------+--------+------------+------------+-----------+------+------+
+| 1221       | eswar    | M      | 2000-01-15 | 2012-01-13 |   7823228 | it   |   24 |
+| 1451       | venuthna | F      | 2004-06-27 | 2021-05-11 |    723458 | ece  |   57 |
+| 2001       | Aishu    | F      | 2002-02-15 | 2022-02-14 |    784748 | CSE  |   66 |
+| 2321       | ram      | M      | 1983-05-01 | 2004-05-16 |     83235 | eee  |   34 |
+| 274        | vikas    | M      | 2019-09-19 | 2014-11-01 |    784748 | CSE  |   66 |
++------------+----------+--------+------------+------------+-----------+------+------+
+5 rows in set (0.05 sec)
+
+mysql> use course;
+Database changed
+mysql> alter table cour add primary key(course_no);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> select*from fal where doj < "2014-11-01";
++------------+----------+--------+------------+------------+-----------+------+------+
+| Faculty_id | Fac_Name | gender | DOB        | DOJ        | Mobile_no | dept | age  |
++------------+----------+--------+------------+------------+-----------+------+------+
+| 1221       | eswar    | M      | 2000-01-15 | 2012-01-13 |   7823228 | it   |   24 |
+| 2321       | ram      | M      | 1983-05-01 | 2004-05-16 |     83235 | eee  |   34 |
++------------+----------+--------+------------+------------+-----------+------+------+
+2 rows in set (0.00 sec)
+
+mysql> select*from stu;
++--------+----------+------+--------+------------+------------+-----------+
+| Rollno | Name     | Dept | Gender | DOB        | city       | mobile_no |
++--------+----------+------+--------+------------+------------+-----------+
+|    268 | adapoma  | cse  | M      | 2001-10-02 | kanipakam  |   9751234 |
+|    269 | sushma   | cse  | f      | 2001-09-09 | pondichery |    975474 |
+|    270 | puma     | cse  | M      | 2003-10-06 | chitoor    |   9827944 |
+|    271 | sai      | cse  | M      | 2003-10-30 | chittor    |  98262944 |
+|    272 | eswar    | cse  | M      | 2002-09-14 | vellore    |  98262324 |
+|    273 | venuthna | cse  | F      | 2003-06-26 | chennai    |  63242324 |
+|    274 | vikas    | cse  | m      | 2002-01-16 | cuddalore  | 637435711 |
++--------+----------+------+--------+------------+------------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> select*from stu where name like '%ma';
++--------+---------+------+--------+------------+------------+-----------+
+| Rollno | Name    | Dept | Gender | DOB        | city       | mobile_no |
++--------+---------+------+--------+------------+------------+-----------+
+|    268 | adapoma | cse  | M      | 2001-10-02 | kanipakam  |   9751234 |
+|    269 | sushma  | cse  | f      | 2001-09-09 | pondichery |    975474 |
+|    270 | puma    | cse  | M      | 2003-10-06 | chitoor    |   9827944 |
++--------+---------+------+--------+------------+------------+-----------+
+3 rows in set (0.02 sec)
+
+mysql> select*from stu;
++--------+----------+------+--------+------------+------------+-----------+
+| Rollno | Name     | Dept | Gender | DOB        | city       | mobile_no |
++--------+----------+------+--------+------------+------------+-----------+
+|    267 | somaraj  | cse  | M      | 2002-10-08 | tanjavur   |   9951234 |
+|    268 | adapoma  | cse  | M      | 2001-10-02 | kanipakam  |   9751234 |
+|    269 | sushma   | cse  | f      | 2001-09-09 | pondichery |    975474 |
+|    270 | puma     | cse  | M      | 2003-10-06 | chitoor    |   9827944 |
+|    271 | sai      | cse  | M      | 2003-10-30 | chittor    |  98262944 |
+|    272 | eswar    | cse  | M      | 2002-09-14 | vellore    |  98262324 |
+|    273 | venuthna | cse  | F      | 2003-06-26 | chennai    |  63242324 |
+|    274 | vikas    | cse  | m      | 2002-01-16 | cuddalore  | 637435711 |
++--------+----------+------+--------+------------+------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select*from stu where name like '%ma%';
++--------+---------+------+--------+------------+------------+-----------+
+| Rollno | Name    | Dept | Gender | DOB        | city       | mobile_no |
++--------+---------+------+--------+------------+------------+-----------+
+|    267 | somaraj | cse  | M      | 2002-10-08 | tanjavur   |   9951234 |
+|    268 | adapoma | cse  | M      | 2001-10-02 | kanipakam  |   9751234 |
+|    269 | sushma  | cse  | f      | 2001-09-09 | pondichery |    975474 |
+|    270 | puma    | cse  | M      | 2003-10-06 | chitoor    |   9827944 |
++--------+---------+------+--------+------------+------------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> select*from stu;
++--------+----------+------+--------+------------+------------+-----------+
+| Rollno | Name     | Dept | Gender | DOB        | city       | mobile_no |
++--------+----------+------+--------+------------+------------+-----------+
+|    267 | somaraj  | cse  | M      | 2002-10-08 | tanjavur   |   9951234 |
+|    268 | adapoma  | cse  | M      | 2001-10-02 | kanipakam  |   9751234 |
+|    269 | sushma   | cse  | f      | 2001-09-09 | pondichery |    975474 |
+|    270 | puma     | cse  | M      | 2003-10-06 | chitoor    |   9827944 |
+|    271 | sai      | cse  | M      | 2003-10-30 | chittor    |  98262944 |
+|    272 | eswar    | cse  | M      | 2002-09-14 | vellore    |  98262324 |
+|    273 | venuthna | cse  | F      | 2003-06-26 | chennai    |  63242324 |
+|    274 | vikas    | cse  | m      | 2002-01-16 | cuddalore  | 637435711 |
++--------+----------+------+--------+------------+------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select*from stu where name like '%sal%';
+Empty set (0.00 sec)
+
+mysql> select*from stu;
++--------+----------+------+--------+------------+------------+-----------+
+| Rollno | Name     | Dept | Gender | DOB        | city       | mobile_no |
++--------+----------+------+--------+------------+------------+-----------+
+|    267 | somaraj  | cse  | M      | 2002-10-08 | tanjavur   |   9951234 |
+|    268 | adapoma  | cse  | M      | 2001-10-02 | kanipakam  |   9751234 |
+|    269 | sushma   | cse  | f      | 2001-09-09 | pondichery |    975474 |
+|    270 | puma     | cse  | M      | 2003-10-06 | chitoor    |   9827944 |
+|    271 | sai      | cse  | M      | 2003-10-30 | chittor    |  98262944 |
+|    272 | eswar    | cse  | M      | 2002-09-14 | vellore    |  98262324 |
+|    273 | venuthna | cse  | F      | 2003-06-26 | chennai    |  63242324 |
+|    274 | vikas    | cse  | m      | 2002-01-16 | cuddalore  | 637435711 |
++--------+----------+------+--------+------------+------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select*from stu where char_length(name) !=6;
++--------+----------+------+--------+------------+-----------+-----------+
+| Rollno | Name     | Dept | Gender | DOB        | city      | mobile_no |
++--------+----------+------+--------+------------+-----------+-----------+
+|    267 | somaraj  | cse  | M      | 2002-10-08 | tanjavur  |   9951234 |
+|    268 | adapoma  | cse  | M      | 2001-10-02 | kanipakam |   9751234 |
+|    270 | puma     | cse  | M      | 2003-10-06 | chitoor   |   9827944 |
+|    271 | sai      | cse  | M      | 2003-10-30 | chittor   |  98262944 |
+|    273 | venuthna | cse  | F      | 2003-06-26 | chennai   |  63242324 |
+|    274 | vikas    | cse  | m      | 2002-01-16 | cuddalore | 637435711 |
++--------+----------+------+--------+------------+-----------+-----------+
+6 rows in set (0.04 sec)
+
+mysql> select*from stu;
++--------+----------+------+--------+------------+------------+-----------+
+| Rollno | Name     | Dept | Gender | DOB        | city       | mobile_no |
++--------+----------+------+--------+------------+------------+-----------+
+|    267 | somaraj  | cse  | M      | 2002-10-08 | tanjavur   |   9951234 |
+|    268 | adapoma  | cse  | M      | 2001-10-02 | kanipakam  |   9751234 |
+|    269 | sushma   | cse  | f      | 2001-09-09 | pondichery |    975474 |
+|    270 | puma     | cse  | M      | 2003-10-06 | chitoor    |   9827944 |
+|    271 | sai      | cse  | M      | 2003-10-30 | chittor    |  98262944 |
+|    272 | eswar    | cse  | M      | 2002-09-14 | vellore    |  98262324 |
+|    273 | venuthna | cse  | F      | 2003-06-26 | chennai    |  63242324 |
+|    274 | vikas    | cse  | m      | 2002-01-16 | cuddalore  | 637435711 |
++--------+----------+------+--------+------------+------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> alter table cour add check (sem_no >=1  and sem_no <=6);
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> select*from stu where name like '%th%';
++--------+----------+------+--------+------------+---------+-----------+
+| Rollno | Name     | Dept | Gender | DOB        | city    | mobile_no |
++--------+----------+------+--------+------------+---------+-----------+
+|    273 | venuthna | cse  | F      | 2003-06-26 | chennai |  63242324 |
++--------+----------+------+--------+------------+---------+-----------+
+1 row in set (0.00 sec)
