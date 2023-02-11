@@ -1,0 +1,83 @@
+mysql> create database tcl;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use tcl;
+Database changed
+create table sal(Id int(3), Name char(20) NOT NULL, Age int(3) NOT NULL,Address varchar(20) NOT NULL UNIQUE, Salary int(10) NOT NULL, primary key(Id));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc sal;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| Id      | int(3)      | NO   | PRI | 0       |       |
+| Name    | char(20)    | NO   |     | NULL    |       |
+| Age     | int(3)      | NO   |     | NULL    |       |
+| Address | varchar(20) | NO   | UNI | NULL    |       |
+| Salary  | int(10)     | NO   |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+mysql> insert into sal value(123,'Ramesh',32,'Ahmedabad',2000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into sal value(231,'Khilan',25,'Delhi',1500);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into sal value(345,'Koushik',23,'Kolkata',20000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into sal value(489,'Chaitali',29,'Mumbai',6500);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into sal value(590,'Hardik',27,'Bhopal',80500);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into sal value(607,'Komal',22,'Lucknow',4500);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into sal value(999,'Muffy',24,'Tirupati',100000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select *from sal;
++-----+----------+-----+-----------+--------+
+| Id  | Name     | Age | Address   | Salary |
++-----+----------+-----+-----------+--------+
+| 123 | Ramesh   |  32 | Ahmedabad |   2000 |
+| 231 | Khilan   |  25 | Delhi     |   1500 |
+| 345 | Koushik  |  23 | Kolkata   |  20000 |
+| 489 | Chaitali |  29 | Mumbai    |   6500 |
+| 590 | Hardik   |  27 | Bhopal    |  80500 |
+| 607 | Komal    |  22 | Lucknow   |   4500 |
+| 999 | Muffy    |  24 | Tirupati  | 100000 |
++-----+----------+-----+-----------+--------+
+7 rows in set (0.00 sec)
+
+mysql> delete from sal where (Salary<20000); commit;
+Query OK, 4 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select *from sal;
++-----+---------+-----+----------+--------+
+| Id  | Name    | Age | Address  | Salary |
++-----+---------+-----+----------+--------+
+| 345 | Koushik |  23 | Kolkata  |  20000 |
+| 590 | Hardik  |  27 | Bhopal   |  80500 |
+| 999 | Muffy   |  24 | Tirupati | 100000 |
++-----+---------+-----+----------+--------+
+3 rows in set (0.00 sec)
+mysql> delete from sal where (Salary<20000); rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select *from sal;
++-----+---------+-----+----------+--------+
+| Id  | Name    | Age | Address  | Salary |
++-----+---------+-----+----------+--------+
+| 345 | Koushik |  23 | Kolkata  |  20000 |
+| 590 | Hardik  |  27 | Bhopal   |  80500 |
+| 999 | Muffy   |  24 | Tirupati | 100000 |
++-----+---------+-----+----------+--------+
+3 rows in set (0.00 sec)
